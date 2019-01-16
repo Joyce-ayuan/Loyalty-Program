@@ -15,7 +15,9 @@
 <script>
 export default {
   methods: {
-    getMenu() {},
+    getMenu() {
+      this.$router.push('/menu')
+    },
     getCard() {
       this.$router.push('/card')
     }

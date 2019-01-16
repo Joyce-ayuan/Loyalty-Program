@@ -30,8 +30,9 @@ export default {
     getMainSwiper() {
       this.axios({
         method: 'get',
-        url: 'http://localhost:3000/swiper'
+        url: 'http://192.168.0.118/amy'
       }).then(res => {
+        console.log(res)
         res.data.forEach((ele, index) => {
           this.swiperImg.push(ele.imgUrl)
         })
