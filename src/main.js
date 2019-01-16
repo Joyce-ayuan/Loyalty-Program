@@ -8,6 +8,28 @@ import 'lib-flexible'
 import '@/assets/css/base.less'
 import '@/assets/css/normalize.less'
 
+// 引入字体图标
+import 'font-awesome/css/font-awesome.min.css'
+
+// 修改mint-ui的样式
+import './assets/css/my-mint.scss'
+
+// mint-ui轮播图
+import {
+  Swipe,
+  SwipeItem
+} from 'mint-ui'
+
+// swiper轮播图
+import Swiper from 'swiper'
+import '../static/swiper/dist/css/swiper.min.css'
+
+import axios from 'axios'
+Vue.prototype.axios = axios
+axios.defaults.baseURL = 'http://localhost:3000'
+
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -17,5 +39,9 @@ new Vue({
   components: {
     App
   },
-  template: '<App/>'
+  template: '<App/>',
+  mounted() {
+    /* eslint-disable no-new */
+    new Swiper('.swiper-container', {})
+  }
 })

@@ -8,7 +8,7 @@
 export default {}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .footer {
   width: 100%;
   height: 35px;
@@ -16,5 +16,6 @@ export default {}
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 999;
 }
 </style>

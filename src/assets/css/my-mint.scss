@@ -1,0 +1,24 @@
+.mint-swipe-indicator.is-active {
+  background-color: #7F7730;
+}
+
+.mint-swipe-indicators {
+  position: absolute;
+  bottom: 25px;
+}
+
+.mint-swipe .mint-swipe-indicators .mint-swipe-indicator {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+}
+
+.mint-swipe-indicator {
+  background-color: #fff;
+}
+
+.mint-swipe-items-wrap>div>img {
+  width: 100%;
+  height: 1111px;
+  background-color: #f98;
+}

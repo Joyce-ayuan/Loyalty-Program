@@ -1,0 +1,15 @@
+{
+  "productSwiper": [{
+    "id": 1,
+    "imgUrl": "http://img4.duitang.com/uploads/item/201209/12/20120912185620_X3Gzj.thumb.700_0.jpeg"
+  }, {
+    "id": 2,
+    "imgUrl": "http://img1.3lian.com/2015/a1/47/d/98.jpg"
+  }, {
+    "id": 3,
+    "imgUrl": "http://pic1.win4000.com/wallpaper/2018-01-04/5a4d9c1e51390.jpg"
+  }, {
+    "id": 4,
+    "imgUrl": "http://img2.imgtn.bdimg.com/it/u=3036910512,4052779191&fm=214&gp=0.jpg"
+  }]
+}

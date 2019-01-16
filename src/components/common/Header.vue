@@ -1,13 +1,26 @@
 <template>
-    <div class="header">
-        <div class="logo">
-            <img src="@/assets/images/pong.jpg" alt="">
-        </div>
+  <div class="header">
+    <div class="nav" @click="getMenu">
+      <i class="fa fa-navicon"></i>
     </div>
+    <div class="logo">
+      <img src="@/assets/images/pong.jpg" alt>
+    </div>
+    <div class="card" @click="getCard">
+      <button>CARD</button>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    getMenu() {},
+    getCard() {
+      this.$router.push('/card')
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -18,12 +31,35 @@ export default {}
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999;
   .logo {
     width: 350px;
     height: 88px;
-    margin: 135px auto;
+    margin: 130px auto;
     img {
       width: 100%;
+    }
+  }
+  .nav {
+    position: absolute;
+    top: 135px;
+    left: 80px;
+    i {
+      color: #99843d;
+      font-size: 89px;
+    }
+  }
+  .card {
+    position: absolute;
+    top: 135px;
+    right: 80px;
+    button {
+      width: 170px;
+      height: 90px;
+      background-color: #99843d;
+      border-radius: 10px;
+      color: #000000;
+      letter-spacing: 5px;
     }
   }
 }
