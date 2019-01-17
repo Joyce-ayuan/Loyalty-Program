@@ -57,3 +57,23 @@
   color: #fff;
   letter-spacing: 5px;
 }
+
+.register .mint-cell:nth-child(1),
+.register .mint-cell:nth-child(2) {
+  width: 50%;
+  float: left;
+}
+
+.register .mint-cell:nth-child(3) {
+  clear: both;
+}
+
+.register .mint-cell:nth-child(5),
+.register .mint-cell:nth-child(6) {
+  width: 50%;
+  float: left;
+}
+
+.register .mint-cell:nth-child(7) {
+  clear: both;
+}

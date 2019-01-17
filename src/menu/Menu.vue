@@ -6,7 +6,9 @@
             </div>
         </div>
         <div class="content">
-          <p v-for="item in menus" :key="item.id" @click="getMenuDetails">{{ item.menuName }}</p>
+          <ul>
+            <li v-for="item in menus" :key="item.id" :class="item.menuName" @click="getMenuDetails"><a href="#">{{ item.menuName }}</a></li>
+          </ul>
         </div>
         <commonFooter></commonFooter>
     </div>
@@ -37,6 +39,16 @@ export default {
   created() {
     this.getMenus()
   }
+  // mounted() {
+  //   this.$nextTick(() => {
+  //     let className = this.menus.menuName
+  //     console.log(
+  //       document.getElementsByClassName(`.content .${this.menus.menuName}`)
+  //     )
+  //     console.log(this.menus)
+  //     console.log(`.content .${className}`)
+  //   })
+  // }
 }
 </script>
 
@@ -69,10 +81,11 @@ export default {
     padding: 80px;
     background-color: @mainColor;
     padding-top: 277px;
-    p {
+    li {
       font-size: 60px;
       letter-spacing: 13px;
       line-height: 180px;
+      color: #000;
     }
   }
 }

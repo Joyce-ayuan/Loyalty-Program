@@ -30,7 +30,14 @@ export default {
   components: { commonHeader, commonFooter },
   methods: {
     toLogin() {
-      this.$router.push('/login')
+      this.axios({
+        methods: 'post',
+        url: 'http://localhost/amy/register/index.php'
+      }).then(res => {
+        if (parseInt(res.data.status) === 200) {
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }
