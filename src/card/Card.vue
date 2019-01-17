@@ -33,7 +33,7 @@ export default {
     getCards() {
       this.axios({
         method: 'get',
-        url: 'http://localhost:3000/cards'
+        url: 'http://localhost/amy/card/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
           this.cards.push(ele)
@@ -41,7 +41,7 @@ export default {
       })
     },
     getDetails(id) {
-      this.$router.push(`/cardDetails?${id}`)
+      this.$router.push(`/cardDetails?id=${id}`)
     }
   },
   created() {

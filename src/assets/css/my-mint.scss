@@ -22,3 +22,38 @@
   height: 1111px;
   background-color: #f98;
 }
+
+.mint-cell {
+  background: none;
+}
+
+.mint-cell-text {
+  color: #fff;
+}
+
+.mint-cell-text {
+  width: 100%;
+}
+
+.mint-field-core {
+  background-color: #000;
+  color: #fff;
+}
+
+.mint-cell-value>input {
+  border-bottom: 4px solid #98843A;
+  line-height: 150px;
+}
+
+.mint-field-core::-ms-input-placeholder {
+  text-align: center;
+  color: #fff;
+  letter-spacing: 5px;
+  font-size: 20px;
+}
+
+.mint-field-core::-webkit-input-placeholder {
+  text-align: center;
+  color: #fff;
+  letter-spacing: 5px;
+}

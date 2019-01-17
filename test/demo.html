@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body,
+    #app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .one {
+      height: 100%;
+      background-color: yellow;
+    }
+
+    .two {
+      background-color: tomato;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .three {
+      background-color: #ffe69f;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.3s;
+    }
+
+    .v-enter,
+    .v-leave-to {
+      transform: translateX(100%);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="one">
+      <p>
+        <router-link to="/foo">下一层</router-link>
+      </p>
+      <h1>第一层</h1>
+    </div>
+    <transition>
+      <router-view></router-view>
+    </transition>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    const Foo = {
+      template: `
+        <div class="whole-page two">
+          <router-link to="/foo/bar">下一层</router-link>
+          <router-link to="/">返回</router-link>
+          <h1>第二层</h1>
+          <transition>
+            <router-view></router-view>
+          </transition>
+        </div>
+      `
+    }
+    const Bar = {
+      template: `
+        <div class="whole-page three">
+          <router-link to="/foo">返回</router-link>
+          <h1>第三层</h1>
+          <transition>
+            <router-view></router-view>
+          </transition>
+        </div>
+      `
+    }
+    const routes = [{
+      path: '/foo',
+      component: Foo,
+      children: [{
+        path: 'bar',
+        component: Bar
+      }]
+    }]
+    const router = new VueRouter({
+      routes
+    })
+    const app = new Vue({
+      router
+    }).$mount('#app')
+
+  </script>
+</body>
+
+</html>

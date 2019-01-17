@@ -4,6 +4,9 @@ import router from './router'
 
 import 'lib-flexible'
 
+// 表单校验
+// import Vuerify from 'vuerify'
+
 // 重置样式
 import '@/assets/css/base.less'
 import '@/assets/css/normalize.less'
@@ -26,11 +29,13 @@ import '../static/swiper/dist/css/swiper.min.css'
 
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://localhost'
 
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
 Vue.config.productionTip = false
+
+// Vue.use(Vuerify)
 
 /* eslint-disable no-new */
 new Vue({

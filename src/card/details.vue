@@ -2,20 +2,19 @@
     <div class="details">
         <cardHeader></cardHeader>
         <div class="title">
-            <p>MEMBERSHIP TIERS</p>
+            <p>BENEFITS</p>
         </div>
         <div class="content">
             <div class="swiper">
-                <mt-swipe :auto="0" :defaultIndex="currentId-1" @change="getCardId" ref="swiper">
+                <mt-swipe :auto="0" :defaultIndex="currentId-1" @change="getCardId">
                     <mt-swipe-item v-for="item in detailsInformation" :key="item.id">
-                        <img :src="item.imgCardUrl" alt="" :data-id="item.id">
+                        <img :src="item.imgCardUrl" alt=""  :data-num="item.id" ref="cardId"  @touchend="getId($event)">
                     </mt-swipe-item>
                 </mt-swipe>
             </div>
             <div class="info">
                 <div class="top">
-                  <!-- //$('.mint-swipe-items-wrap .is-active').dataset().id -->
-                    <p>{{ currentInformation.companyName }}</p>
+                    <!-- <p>{{ currentInformation.companyName }}</p> -->
                     <p>{{ currentInformation.cardName }}</p>
                     <p>{{ currentInformation.features }}</p>
                 </div>
@@ -39,38 +38,38 @@ export default {
       currentInformation: {}
     }
   },
+  components: { cardHeader, commonFooter },
   methods: {
-    getCurentDetails() {
-      this.currentId = parseInt(location.href.split('?')[1])
+    getCurentDetails(id) {
+      id = this.currentId
       this.axios({
         methods: 'get',
-        url: `http://localhost:3000/cards?id=${this.currentId}`
+        url: `http://localhost/amy/card/index.php?id=${id}`
       }).then(res => {
-        this.currentInformation = res.data[0]
-        console.log(this.currentInformation)
+        this.currentInformation = res.data
       })
     },
     getDetails() {
       this.axios({
         methods: 'get',
-        url: 'http://localhost:3000/cards'
+        url: 'http://localhost/amy/card/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
           this.detailsInformation.push(ele)
         })
       })
     },
-    // handleChange(index) {
-    //   console.log(index)
-    // },
-    getCardId(id) {
-      // console.log(document.querySelector('.swiper .is-active img').dataset.id)
-      console.log(this.$refs.swiper)
+    getId(e) {
+      this.currentId = ''
+      this.currentId = parseInt(e.target.getAttribute('data-num'))
+    },
+    getCardId() {
+      this.getCurentDetails(this.currentId)
     }
   },
-  components: { cardHeader, commonFooter },
   created() {
-    this.getCurentDetails()
+    this.currentId = parseInt(location.href.split('?')[1].split('=')[1])
+    this.getCurentDetails(this.currentId)
     this.getDetails()
   }
 }

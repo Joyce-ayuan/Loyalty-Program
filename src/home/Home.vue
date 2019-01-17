@@ -22,17 +22,21 @@ import underSwiper from '../components/swiper/HomeDownSwiper.vue'
 export default {
   data() {
     return {
-      swiperImg: []
+      swiperImg: [],
+      view: 'v-a'
     }
   },
-  components: { commonHeader, commonFooter, underSwiper },
+  components: {
+    commonHeader,
+    commonFooter,
+    underSwiper
+  },
   methods: {
     getMainSwiper() {
       this.axios({
         method: 'get',
-        url: 'http://192.168.0.118/amy'
+        url: 'http://localhost/amy/mainSwiper/index.php'
       }).then(res => {
-        console.log(res)
         res.data.forEach((ele, index) => {
           this.swiperImg.push(ele.imgUrl)
         })

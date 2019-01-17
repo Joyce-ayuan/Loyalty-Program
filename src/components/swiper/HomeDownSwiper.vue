@@ -31,7 +31,7 @@ export default {
     getMainSwiper() {
       this.axios({
         method: 'get',
-        url: 'http://localhost:3000/productSwiper'
+        url: 'http://localhost/amy/productSwiper/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
           this.swiperUrl.push(ele.imgUrl)

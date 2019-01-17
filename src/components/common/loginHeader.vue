@@ -6,6 +6,9 @@
     <div class="logo">
       <img src="@/assets/images/pong.jpg" alt>
     </div>
+    <div class="card" @click="close">
+      <i class="fa fa-close"></i>
+    </div>
   </div>
 </template>
 
@@ -15,8 +18,8 @@ export default {
     getMenu() {
       this.$router.push('/menu')
     },
-    getCard() {
-      this.$router.push('/card')
+    close() {
+      window.history.go(-1)
     }
   }
 }
@@ -43,6 +46,15 @@ export default {
     position: absolute;
     top: 135px;
     left: 80px;
+    i {
+      color: #99843d;
+      font-size: 89px;
+    }
+  }
+  .card {
+    position: absolute;
+    top: 135px;
+    right: 80px;
     i {
       color: #99843d;
       font-size: 89px;
