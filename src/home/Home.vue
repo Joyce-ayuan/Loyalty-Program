@@ -52,7 +52,7 @@ export default {
 <style lang="less" scoped>
 .home {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   .mainSwiper {
     margin-top: 276px;
     width: 100%;

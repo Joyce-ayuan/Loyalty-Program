@@ -54,6 +54,7 @@ export default {
 @mainColor: #98843a;
 .cardIndex {
   width: 100%;
+  height: 100vh;
   padding-top: 280px;
   padding-bottom: 35px;
   background: #000;

@@ -80,7 +80,7 @@ export default {
 .details {
   width: 100%;
   padding-top: 280px;
-  padding-bottom: 35px;
+  padding-bottom: 60px;
   background: #000;
   .title {
     width: 100%;
@@ -101,11 +101,7 @@ export default {
     .swiper {
       width: 100%;
       height: 787px;
-      img {
-        width: 503px;
-        height: 319px;
-        margin: 160px auto;
-      }
+      margin-top: 150px;
     }
     .info {
       width: 100%;
@@ -120,10 +116,11 @@ export default {
             color: @mainColor;
             letter-spacing: 5px;
             font-weight: 700;
+            font-size: 40px;
           }
           &:nth-child(2) {
             color: #fff;
-            font-size: 50px;
+            font-size: 60px;
             letter-spacing: 15px;
           }
           &:nth-child(3) {
@@ -141,6 +138,7 @@ export default {
           word-break: break-all;
           text-align: center;
           padding: 20px;
+          font-size: 50px;
         }
       }
     }

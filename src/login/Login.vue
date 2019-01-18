@@ -54,6 +54,8 @@ export default {
 .login {
   padding-top: 277px;
   position: relative;
+  width: 100%;
+  height: 100vh;
   .pic {
     width: 100%;
     height: 990px;
@@ -78,12 +80,12 @@ export default {
       height: 97px;
       border-radius: 35px;
       background: @mainColor;
-      margin-top: 135px;
-      margin-left: 250px;
       color: #000;
       letter-spacing: 35px;
       font-weight: 700;
       font-size: 40px;
+      display: block;
+      margin: 135px auto 0;
     }
     p {
       color: @mainColor;
@@ -94,11 +96,12 @@ export default {
   }
   .register {
     width: 100%;
-    height: 120px;
+    height: 124px;
     border: 3px solid @mainColor;
     position: absolute;
     bottom: 50px;
     left: 0;
+    background: #000;
     p {
       color: @mainColor;
       font-size: 60px;

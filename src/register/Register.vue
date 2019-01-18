@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import commonHeader from '../components/common/loginHeader.vue'
+import commonHeader from '../components/common/LoginHeader.vue'
 import commonFooter from '../components/common/Footer.vue'
 export default {
   components: { commonHeader, commonFooter },
@@ -46,6 +46,8 @@ export default {
 <style lang="less" scoped>
 @mainColor: #8c722d;
 .register {
+  width: 100%;
+  height: 100%;
   padding-top: 280px;
   background: #000;
   .content {

@@ -8,11 +8,11 @@
         <div class="content">
           <ul>
             <!-- <li v-for="item in menus" :key="item.id" :class="item.menuName" @click="getMenuDetails(item.menuName)" ref="menuName"><a href="#">{{ item.menuName }}</a></li> -->
-            <li @click="getLogin">LOGIN/REGISTER</li>
-            <li @click="getHome">HOME</li>
-            <li @click="getMembership">MEMBERSHIP.TIERS</li>
-            <li @click="getLocations">LOCATIONS</li>
-            <li @click="getMore">More</li>
+            <li @click="toAbout">ABOUT PONG GROUP</li>
+            <li @click="toRewards">REWARDS RATE</li>
+            <li @click="toTc">TERMS & CONDITIONS</li>
+            <li @click="toPrivary">PRIVACY POLICY</li>
+            <li @click="toNotification">PUSH NOTIFICATION</li>
           </ul>
         </div>
         <commonFooter></commonFooter>
@@ -37,34 +37,21 @@ export default {
         this.menus = res.data
       })
     },
-    getLogin() {
-      this.$router.push('/login')
+    toAbout() {
+      this.$router.push('/about')
     },
-    getHome() {
-      this.$router.push('/home')
+    toRewards() {
+      this.$router.push('/rewards')
     },
-    getMembership() {
-      this.$router.push('/card')
+    toTc() {
+      this.$router.push('/tc')
     },
-    getLocations() {
-      this.$router.push('/location')
+    toPrivary() {
+      this.$router.push('/privary')
     },
-    getMore() {
-      this.$router.push('/more')
+    toNotification() {
+      this.$router.push('/notification')
     }
-  },
-  created() {
-    this.getMenus()
-    // mounted() {
-    //   this.$nextTick(() => {
-    //     let className = this.menus.menuName
-    //     console.log(
-    //       document.getElementsByClassName(`.content .${this.menus.menuName}`)
-    //     )
-    //     console.log(this.menus)
-    //     console.log(`.content .${className}`)
-    //   })
-    // }
   }
 }
 </script>

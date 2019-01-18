@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .component-fade-enter-active {
+      /* transition: opacity .3s ease; */
+      /* transform: translateX(200px) rotateX(45deg); */
+      /* animation-name: animation1 10s; */
+      /* transition: all 3s; */
+      animation: bounce-in 1s linear;
+    }
+
+    .component-fade-leave-active {
+      /* transform: translateX(-200px);
+      transition: all 3s; */
+      /* animation: bounce-in 1s; */
+    }
+
+    @keyframes bounce-in {
+      0% {
+        transform: translateX(800px);
+      }
+
+      50% {
+        transform: translateX(500px);
+      }
+
+      100% {
+        transform: translateX(200px);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="" id="app">
+    <button @click="check">按钮</button>
+    <transition name="component-fade" mode="out-in">
+      <component v-bind:is="view"></component>
+    </transition>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        view: 'v-a'
+      },
+      components: {
+        'v-a': {
+          template: '<div style="width: 400px; height: 400px; backgroundColor: yellow">V-A</div>'
+        },
+        'v-b': {
+          template: '<div style="width: 400px; height: 400px; backgroundColor: pink">V-B</div>'
+        }
+      },
+      methods: {
+        check() {
+          if (this.view === 'v-a') {
+            this.view = 'v-b'
+          } else {
+            this.view = 'v-a'
+          }
+          //   this.view === 'v-a' ? 'v-b' : 'v-a'
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

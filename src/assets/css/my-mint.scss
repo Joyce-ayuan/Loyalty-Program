@@ -17,7 +17,7 @@
   background-color: #fff;
 }
 
-.mint-swipe-items-wrap>div>img {
+.home .mint-swipe-items-wrap>div>img {
   width: 100%;
   height: 1111px;
   background-color: #f98;
@@ -76,4 +76,17 @@
 
 .register .mint-cell:nth-child(7) {
   clear: both;
+}
+
+.ifc .mint-swipe-item {
+  padding: 100px;
+}
+
+.ifc .mint-swipe-item img {
+  width: 100%;
+  height: 100%;
+}
+
+.about .mint-swipe-item img {
+  height: 685px;
 }

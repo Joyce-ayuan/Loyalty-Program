@@ -43,6 +43,8 @@ export default {
 <style lang="less" scoped>
 @mainColor: #8c722d;
 .personal {
+  width: 100%;
+  height: 100vh;
   padding-top: 280px;
   background: #000;
   .title {
