@@ -7,10 +7,11 @@
         </div>
         <div class="content">
           <ul>
-            <!-- <li v-for="item in menus" :key="item.id" :class="item.menuName" @click="getMenuDetails(item.menuName)" ref="menuName"><a href="#">{{ item.menuName }}</a></li> -->
             <li @click="getLogin">LOGIN/REGISTER</li>
+            <li>...</li>
             <li @click="getHome">HOME</li>
             <li @click="getMembership">MEMBERSHIP.TIERS</li>
+            <li>...</li>
             <li @click="getLocations">LOCATIONS</li>
             <li @click="getMore">More</li>
           </ul>
@@ -29,6 +30,14 @@ export default {
   },
   components: { commonFooter },
   methods: {
+    // path：跳转路径  栗子：/home, /login
+    jump(path) {
+      if (location.href.split('#')[1] === path) {
+        location.reload()
+      } else {
+        this.$router.push(path)
+      }
+    },
     getMenus() {
       this.axios({
         methods: 'get',
@@ -38,33 +47,23 @@ export default {
       })
     },
     getLogin() {
-      this.$router.push('/login')
+      this.jump('/login')
     },
     getHome() {
-      this.$router.push('/home')
+      this.jump('/home')
     },
     getMembership() {
-      this.$router.push('/card')
+      this.jump('/card')
     },
     getLocations() {
-      this.$router.push('/location')
+      this.jump('/location')
     },
     getMore() {
-      this.$router.push('/more')
+      this.jump('/more')
     }
   },
   created() {
     this.getMenus()
-    // mounted() {
-    //   this.$nextTick(() => {
-    //     let className = this.menus.menuName
-    //     console.log(
-    //       document.getElementsByClassName(`.content .${this.menus.menuName}`)
-    //     )
-    //     console.log(this.menus)
-    //     console.log(`.content .${className}`)
-    //   })
-    // }
   }
 }
 </script>
@@ -73,7 +72,7 @@ export default {
 @mainColor: #98843a;
 .menu {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   .header {
     width: 100%;
     height: 277px;
@@ -94,15 +93,17 @@ export default {
   }
   .content {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding: 80px;
     background-color: @mainColor;
     padding-top: 277px;
-    li {
-      font-size: 60px;
-      letter-spacing: 13px;
-      line-height: 180px;
-      color: #000;
+    ul {
+      li {
+        font-size: 60px;
+        letter-spacing: 13px;
+        line-height: 180px;
+        color: #000;
+      }
     }
   }
 }

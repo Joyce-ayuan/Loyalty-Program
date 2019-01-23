@@ -1,6 +1,15 @@
 <template>
-    <div class="cardIndex">
-        <cardHeader></cardHeader>
+    <div class="cardIndex" ref="cardIndex">
+      <div class="membership" ref="membership">
+        <!-- <cardHeader></cardHeader> -->
+        <div class="header">
+          <div class="nav" @click="getMenu">
+            <i class="fa fa-navicon"></i>
+          </div>
+          <div class="logo">
+            <img src="@/assets/images/pong.jpg" alt>
+          </div>
+        </div>
         <div class="title">
             <p>MEMBERSHIP TIERS</p>
         </div>
@@ -16,36 +25,63 @@
             </ul>
         </div>
         <commonFooter></commonFooter>
+      </div>
+      <div class="menu" ref="menu" v-if="isLogin">
+          <LoginMenu></LoginMenu>
+      </div>
+      <div class="menu" ref="menu" v-else>
+          <Menu></Menu>
+      </div>
     </div>
 </template>
 
 <script>
-import cardHeader from '../components/common/cardHeader.vue'
+// import cardHeader from '../components/common/cardHeader.vue'
 import commonFooter from '../components/common/Footer.vue'
+import Menu from '../menu/Menu.vue'
+import LoginMenu from '../menu/LoginMenu.vue'
+import '../../static/js/kook.js'
+import '../../static/js/kook.add.js'
 export default {
   data() {
     return {
-      cards: []
+      cards: [],
+      isLogin: false
     }
   },
-  components: { cardHeader, commonFooter },
+  components: { commonFooter, Menu, LoginMenu },
   methods: {
     getCards() {
       this.axios({
         method: 'get',
         url: 'http://localhost/amy/card/index.php'
       }).then(res => {
-        res.data.forEach((ele, index) => {
-          this.cards.push(ele)
-        })
+        this.cards = res.data
       })
     },
     getDetails(id) {
       this.$router.push(`/cardDetails?id=${id}`)
+    },
+    getMenu() {
+      this.$refs.menu.style.display = 'block'
+      this.$refs.membership.style.marginTop = 0
+      this.$refs.cardIndex.style.perspective = '200px'
+      /* eslint-disable */
+      kook('.membership').toggle_cls('menu')
+    },
+    getCard() {
+      this.$router.push('/card')
     }
   },
   created() {
     this.getCards()
+    if (parseInt(document.cookie.split('=')[1]) === 200) {
+      this.isLogin = true
+      console.log(this.isLogin)
+    }
+  },
+  mounted() {
+    this.$refs.menu.style.display = 'none'
   }
 }
 </script>
@@ -53,66 +89,111 @@ export default {
 <style lang="less" scoped>
 @mainColor: #98843a;
 .cardIndex {
-  width: 100%;
-  height: 100vh;
-  padding-top: 280px;
-  padding-bottom: 35px;
-  background: #000;
-  .title {
+  .membership {
     width: 100%;
-    height: 100px;
-    border: 2px solid @mainColor;
-    text-align: center;
-    p {
-      color: @mainColor;
-      font-size: 50px;
-      letter-spacing: 5px;
-      line-height: 100px;
+    height: 100%;
+    padding-top: 280px;
+    padding-bottom: 35px;
+    background: #000;
+    .header {
+      height: 277px;
+      width: 100%;
+      background-color: #000000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      .logo {
+        width: 350px;
+        height: 88px;
+        margin: 130px auto;
+        img {
+          width: 100%;
+        }
+      }
+      .nav {
+        position: absolute;
+        top: 135px;
+        left: 80px;
+        i {
+          color: #99843d;
+          font-size: 89px;
+        }
+      }
+    }
+    .title {
+      width: 100%;
+      height: 100px;
+      border: 2px solid @mainColor;
+      text-align: center;
+      p {
+        color: @mainColor;
+        font-size: 50px;
+        letter-spacing: 5px;
+        line-height: 100px;
+      }
+    }
+    .info {
+      width: 1160px;
+      height: 100vh;
+      margin: 65px auto;
+      ul {
+        li {
+          width: 579px;
+          height: 446px;
+          float: left;
+          padding: 10px;
+          margin-top: 20px;
+          .card {
+            width: 503px;
+            height: 319px;
+            background-color: yellowgreen;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .desc {
+            text-align: center;
+            p {
+              line-height: 60px;
+            }
+            p:nth-child(1) {
+              font-size: 40px;
+              color: #fff;
+              letter-spacing: 5px;
+            }
+            p:nth-child(2) {
+              color: @mainColor;
+              letter-spacing: 5px;
+            }
+          }
+        }
+        li:last-child {
+          position: relative;
+          left: 50%;
+          margin-left: -290px;
+        }
+      }
     }
   }
-  .info {
-    width: 1160px;
-    height: 100%;
-    margin: 65px auto;
-    ul {
-      li {
-        width: 579px;
-        height: 446px;
-        float: left;
-        padding: 10px;
-        margin-top: 20px;
-        .card {
-          width: 503px;
-          height: 319px;
-          background-color: yellowgreen;
-          margin: 0 auto;
-          margin-bottom: 20px;
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .desc {
-          text-align: center;
-          p {
-            line-height: 60px;
-          }
-          p:nth-child(1) {
-            font-size: 40px;
-            color: #fff;
-            letter-spacing: 5px;
-          }
-          p:nth-child(2) {
-            color: @mainColor;
-            letter-spacing: 5px;
-          }
-        }
-      }
-      li:last-child {
-        position: relative;
-        left: 50%;
-        margin-left: -290px;
-      }
+}
+
+// 切换效果
+.cardIndex {
+  .membership {
+    &.menu {
+      margin-left: 80%;
+      margin-top: -300px;
+      backface-visibility: hidden;
+      transition: 1s;
+      transform: rotateY(-20deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99999;
     }
   }
 }

@@ -1,0 +1,36 @@
+ [{
+    "id": 1,
+    "imgCardUrl": "http://img0.imgtn.bdimg.com/it/u=2091243290,1693945378&fm=26&gp=0.jpg",
+    "cardName": "JADE",
+    "features": "BENEFITS",
+    "desc": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffffffffffffffffffffff",
+    "companyName": "PONG GROUP"
+  }, {
+    "id": 2,
+    "imgCardUrl": "http://img3.imgtn.bdimg.com/it/u=2769449896,1336642811&fm=26&gp=0.jpg",
+    "cardName": "GOLD",
+    "features": "BENEFITS",
+    "desc": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffffffffffffffffffffff",
+    "companyName": "PONG GROUP"
+  }, {
+    "id": 3,
+    "imgCardUrl": "http://img2.imgtn.bdimg.com/it/u=2175788774,3987314566&fm=26&gp=0.jpg",
+    "cardName": "PLATINUM",
+    "features": "BENEFITS",
+    "desc": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffffffffffffffffffffff",
+    "companyName": "PONG GROUP"
+  }, {
+    "id": 4,
+    "imgCardUrl": "http://img5.imgtn.bdimg.com/it/u=1948294163,806022906&fm=26&gp=0.jpg",
+    "cardName": "BLACK",
+    "features": "BENEFITS",
+    "desc": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffffffffffffffffffffff",
+    "companyName": "PONG GROUP"
+  }, {
+    "id": 5,
+    "imgCardUrl": "http://img0.imgtn.bdimg.com/it/u=471713437,997407317&fm=26&gp=0.jpg",
+    "cardName": "DIAMOND",
+    "features": "BENEFITS",
+    "desc": "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaffffffffffffffffffffffffff",
+    "companyName": "PONG GROUP"
+  }]

@@ -19,7 +19,6 @@ export default {
       this.$router.push('/menu')
     },
     close() {
-      console.log(111)
       window.history.go(-1)
     }
   }

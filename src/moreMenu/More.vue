@@ -2,7 +2,7 @@
     <div class="menu">
         <div class="header">
             <div class="top">
-              <i class="fa fa-navicon"></i>
+              <i class="fa fa-navicon" @click="getBack"></i>
             </div>
         </div>
         <div class="content">
@@ -12,7 +12,7 @@
             <li @click="toRewards">REWARDS RATE</li>
             <li @click="toTc">TERMS & CONDITIONS</li>
             <li @click="toPrivary">PRIVACY POLICY</li>
-            <li @click="toNotification">PUSH NOTIFICATION</li>
+            <!-- <li @click="toNotification">PUSH NOTIFICATION</li> -->
           </ul>
         </div>
         <commonFooter></commonFooter>
@@ -51,6 +51,9 @@ export default {
     },
     toNotification() {
       this.$router.push('/notification')
+    },
+    getBack() {
+      window.history.go(-1)
     }
   }
 }

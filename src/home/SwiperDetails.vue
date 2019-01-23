@@ -1,6 +1,6 @@
 <template>
-  <div class="outerTc" ref="outerTc">
-    <div class="rewards" ref="rewards">
+<div class="outerHome" ref="outerHome">
+    <div class="home" ref="home">
         <!-- <commonHeader></commonHeader> -->
         <div class="header">
           <div class="nav" @click="getMenu">
@@ -13,14 +13,13 @@
             <button>CARD</button>
           </div>
         </div>
-        <div class="content">
-            <div class="title">
-                <p>TERMS & CONDITIONS</p>
-            </div>
-            <div class="info"  v-for ="item in rewardMsg" :key="item.id">
-                <h1>TITLE</h1>
-                <p>{{ item.info }}</p>
-            </div>
+        <!-- 主轮播图 -->
+        <div class="mainSwiper">
+            <img :src="mainImg" alt="">
+        </div>
+        <!-- 底部轮播图 -->
+        <div class="underImg">
+            <img src="" alt="首页轮播图点击进去显示土片">
         </div>
         <commonFooter></commonFooter>
     </div>
@@ -30,11 +29,11 @@
     <div class="menu" ref="menu" v-else>
         <Menu></Menu>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
-// import commonHeader from '../components/common/Header.vue'
+import commonHeader from '../components/common/Header.vue'
 import commonFooter from '../components/common/Footer.vue'
 import Menu from '../menu/Menu.vue'
 import LoginMenu from '../menu/LoginMenu.vue'
@@ -43,32 +42,37 @@ import '../../static/js/kook.add.js'
 export default {
   data() {
     return {
-      rewardMsg: [],
+      mainImg: '',
       isLogin: false
     }
   },
-  components: { Menu, commonFooter, LoginMenu },
+  components: {
+    commonHeader,
+    commonFooter,
+    Menu,
+    LoginMenu
+  },
   methods: {
     getMenu() {
       this.$refs.menu.style.display = 'block'
-      this.$refs.rewards.style.overflow = 'hidden'
-      this.$refs.rewards.style.marginTop = 0
-      this.$refs.rewards.style.height = '100%'
-      this.$refs.outerTc.style.perspective = '200px'
-      this.$refs.outerTc.style.overflow = 'hidden'
+      this.$refs.home.style.overflow = 'hidden'
+      this.$refs.home.style.marginTop = 0
+      this.$refs.outerHome.style.perspective = '200px'
+      this.$refs.outerHome.style.overflow = 'hidden'
       /* eslint-disable */
-      kook('.rewards').toggle_cls('menu')
+      kook('.home').toggle_cls('menu')
     },
     getCard() {
       this.$router.push('/successCard')
     }
   },
   created() {
+    let id = parseInt(location.href.split('?')[1].split('=')[1])
     this.axios({
-      methods: 'get',
-      url: 'http://localhost/amy/reward/index.php'
+      method: 'get',
+      url: `http://localhost/amy/mainSwiper/index.php?id=${id}`
     }).then(res => {
-      this.rewardMsg = res.data
+      this.mainImg = res.data.imgUrl
     })
 
     if (parseInt(document.cookie.split('=')[1]) === 200) {
@@ -83,11 +87,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@mainColor: #98843a;
-.outerTc {
-  .rewards {
+.outerHome {
+  .home {
     width: 100%;
-    height: 100%;
+    background: #000;
     .header {
       height: 277px;
       width: 100%;
@@ -127,48 +130,36 @@ export default {
         }
       }
     }
-    .content {
-      padding-top: 275px;
+    .mainSwiper {
+      margin-top: 276px;
       width: 100%;
+      height: 1206px;
       background-color: #000;
-      .title {
+      img {
+        display: block;
         width: 100%;
-        height: 100px;
-        border: 2px solid @mainColor;
-        text-align: center;
-        position: fixed;
-        background-color: #000;
-        left: 0;
-        p {
-          color: @mainColor;
-          font-size: 50px;
-          letter-spacing: 5px;
-          line-height: 100px;
-        }
+        height: 100%;
+        background: #f98;
       }
-      .info {
+    }
+    .underImg {
+      width: 100%;
+      height: 680px;
+      img {
+        display: block;
         width: 100%;
-        padding: 70px;
-        &:nth-child(2) {
-          margin-top: 200px;
-        }
-        h1 {
-          color: #fff;
-        }
-        p {
-          color: #fff;
-          font-size: 50px;
-          word-wrap: break-word;
-          line-height: 90px;
-        }
+        height: 100%;
+        background: #f09;
+        color: #fff;
+        font-size: 90px;
       }
     }
   }
 }
 
 // 切换效果
-.outerTc {
-  .rewards {
+.outerHome {
+  .home {
     &.menu {
       margin-left: 80%;
       margin-top: -300px;

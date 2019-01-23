@@ -4,7 +4,7 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item in swiperUrl" :key="item.id">
-                        <img :src="item" alt="">
+                        <img :src="item.imgUrl" alt="">
                     </div>
                 </div>
                 <!-- 如果需要导航按钮 -->
@@ -34,7 +34,7 @@ export default {
         url: 'http://localhost/amy/productSwiper/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
-          this.swiperUrl.push(ele.imgUrl)
+          this.swiperUrl.push(ele)
         })
       })
     }
@@ -44,34 +44,44 @@ export default {
   },
   mounted() {
     /* eslint-disable */
-    let mySwiper = new Swiper('.swiper-container', {
-      // =====================================================BUG
-      loop: true,
+    var mySwiper = new Swiper('.swiper-container', {
+      // initialSlide: 0,
+      slidesPerView: 2,
+      observer: true,
+      observeParents: true,
       nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-      observer: true, //修改swiper自己或子元素时，自动初始化swiper
-      observeParents: true //修改swiper的父元素时，自动初始化swiper
+      prevButton: '.swiper-button-prev'
     })
+    setTimeout(() => {
+      mySwiper.slideTo(0, 50, false)
+      document.getElementsByClassName('swiper-wrapper')[0].style.transform =
+        'translate3d(0px, 0px, 0px)'
+    }, 50)
   }
 }
 </script>
 
 <style lang="less" scoped>
+@mainColor: #98843a;
 .downSwiper {
   width: 100%;
-  height: 687px;
+  padding-bottom: 150px;
   background: #000;
   .swiper-container {
     width: 100%;
-    height: 687px;
+    height: 100%;
     .swiper-wrapper {
       width: 100%;
-      height: 687px;
+      height: 100%;
       margin: 0 auto;
-    }
-    .swiper-slide {
-      background: yellow;
-      border: 1px solid #000;
+      .swiper-slide {
+        img {
+          width: 830px;
+          height: 520px;
+          background-color: #f98;
+          margin: 0 auto;
+        }
+      }
     }
     .swiper-button-prev {
       width: 70px;

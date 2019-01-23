@@ -1,5 +1,5 @@
 <template>
-    <div class="login" ref="login">
+    <div class="login">
       <div class="innerLogin" ref="innerLogin">
         <div class="header">
           <div class="nav" @click="getMenu">
@@ -12,7 +12,6 @@
             <i class="fa fa-close"></i>
           </div>
         </div>
-        <!-- <LoginHeader><LoginHeader> -->
         <div class="pic">
             <img src="" alt="">
         </div>
@@ -25,22 +24,18 @@
         <div class="register" @click="register">
             <p>REGISTER NOW</p>
         </div>
-        <commonFooter class="flagFooter" ref="footer"></commonFooter>
+        <commonFooter class="flagFooter" ref="footer" style="bottom: -10px"></commonFooter>
       </div>
-      <div class="menu" ref="menu" v-if="isLogin">
-        <LoginMenu></LoginMenu>
-      </div>
-      <div class="menu" ref="menu" v-else>
+      <div class="menu" ref="menu">
         <Menu></Menu>
       </div>
     </div>
 </template>
 
 <script>
-// import LoginHeader from '../components/common/LoginHeader.vue'
+import LoginHeader from '../components/common/LoginHeader.vue'
 import commonFooter from '../components/common/Footer.vue'
 import Menu from '../menu/Menu.vue'
-import LoginMenu from '../menu/LoginMenu.vue'
 import '../../static/js/kook.js'
 import '../../static/js/kook.add.js'
 export default {
@@ -49,11 +44,10 @@ export default {
       users: {
         username: '',
         password: ''
-      },
-      isLogin: false
+      }
     }
   },
-  components: { LoginMenu, commonFooter, Menu },
+  components: { LoginHeader, commonFooter, Menu },
   methods: {
     login() {
       this.axios({
@@ -61,8 +55,6 @@ export default {
         url: 'http://localhost/amy/login/index.php'
       }).then(res => {
         if (parseInt(res.data.status) === 200) {
-          console.log('登陆成功')
-          document.cookie = 'code=' + 200
           this.$router.push('/personal')
         }
       })
@@ -71,29 +63,20 @@ export default {
       this.$router.push('/register')
     },
     getMenu() {
-      this.$refs.menu.style.display = 'block'
-      this.$refs.innerLogin.style.marginTop = 0
-      Array.from(
-        document.getElementsByClassName('flagFooter')
-      )[0].style.position =
-        'static'
-      this.$refs.login.style.perspective = '100px'
-      this.$refs.login.style.overflow = 'hidden'
+      console.log(11)
+      this.$router.push('/menu')
+      // this.$refs.menu.style.display = 'block'
+      // this.$refs.innerLogin.style.marginTop = 0
+      // Array.from(
+      //   document.getElementsByClassName('flagFooter')
+      // )[0].style.position =
+      //   'static'
       /* eslint-disable */
-      kook('.innerLogin').toggle_cls('menu')
+      // kook('.innerLogin').toggle_cls('menu')
     },
     close() {
       window.history.go(-1)
     }
-  },
-  created() {
-    if (parseInt(document.cookie.split('=')[1]) === 200) {
-      this.isLogin = true
-      console.log(this.isLogin)
-    }
-  },
-  mounted() {
-    this.$refs.menu.style.display = 'none'
   }
 }
 </script>
@@ -101,13 +84,11 @@ export default {
 <style lang="less" scoped>
 @mainColor: #98843a;
 .login {
+  padding-top: 277px;
   width: 100%;
-  background: #fff;
+  height: 100%;
+  background: #000;
   .innerLogin {
-    width: 100%;
-    height: 100%;
-    background: #000;
-    padding-top: 277px;
     .header {
       height: 277px;
       width: 100%;
@@ -184,17 +165,19 @@ export default {
     .register {
       width: 100%;
       height: 124px;
+      border: 3px solid @mainColor;
       background: #000;
-      padding-bottom: 250px;
+      margin-bottom: 250px;
       p {
         color: @mainColor;
         font-size: 60px;
         letter-spacing: 15px;
         text-align: center;
         line-height: 120px;
-        border: 3px solid @mainColor;
       }
     }
+  }
+  .menu {
   }
 }
 
@@ -202,16 +185,20 @@ export default {
 .login {
   .innerLogin {
     &.menu {
-      margin-left: 85%;
-      margin-top: -300px;
+      height: calc(100% - 100px);
+      margin-left: -550px;
+      margin-top: -30px;
       backface-visibility: hidden;
+      background-color: #fff;
       transition: 1s;
-      transform: rotateY(-20deg);
+      transform: rotateY(-50deg);
       position: absolute;
-      top: -120px;
+      top: 0;
       left: 0;
-      z-index: 99999;
     }
+  }
+  .menu {
+    display: none;
   }
 }
 </style>

@@ -1,0 +1,16 @@
+[{
+    "id": 1,
+    "menuName": "LOGIN/REGISTER"
+  }, {
+    "id": 2,
+    "menuName": "HOME"
+  }, {
+    "id": 3,
+    "menuName": "MEMBERSHIP TIERS"
+  }, {
+    "id": 4,
+    "menuName": "LOCATIONS"
+  }, {
+    "id": 5,
+    "menuName": "More"
+  }]

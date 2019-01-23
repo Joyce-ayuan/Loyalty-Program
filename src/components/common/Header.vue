@@ -9,9 +9,6 @@
     <div class="card" @click="getCard">
       <button>CARD</button>
     </div>
-    <!-- <transition name="component-menu" mode="out-in">
-      <component v-bind:is="view"></component>
-    </transition> -->
   </div>
 </template>
 
@@ -19,26 +16,12 @@
 // import Home from '../../home/Home.vue'
 // import Menu from '../../menu/Menu.vue'
 export default {
-  data() {
-    return {
-      view: 'v-a'
-    }
-  },
-  // components: {
-  //   'v-a': Home,
-  //   'v-b': Menu
-  // },
   methods: {
     getMenuToggle() {
-      // if (this.view === Home) {
-      //   this.view = 'v-b'
-      // } else {
-      //   this.view = 'v-a'
-      // }
       this.$router.push('/menu')
     },
     getCard() {
-      this.$router.push('/card')
+      this.$router.push('/successCard')
     }
   }
 }
@@ -82,33 +65,6 @@ export default {
       color: #000000;
       letter-spacing: 5px;
     }
-  }
-}
-.component-fade-enter-active {
-  /* transition: opacity .3s ease; */
-  /* transform: translateX(200px) rotateX(45deg); */
-  /* animation-name: animation1 10s; */
-  /* transition: all 3s; */
-  animation: bounce-in 1s linear;
-}
-
-.component-fade-leave-active {
-  /* transform: translateX(-200px);
-      transition: all 3s; */
-  /* animation: bounce-in 1s; */
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: translateX(800px);
-  }
-
-  50% {
-    transform: translateX(500px);
-  }
-
-  100% {
-    transform: translateX(200px);
   }
 }
 </style>
