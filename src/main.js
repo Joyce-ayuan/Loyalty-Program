@@ -29,7 +29,7 @@ import '../static/swiper/dist/css/swiper.min.css'
 
 import axios from 'axios'
 Vue.prototype.axios = axios
-axios.defaults.baseURL = 'http://localhost'
+axios.defaults.baseURL = 'http://localhost/amy/'
 
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)

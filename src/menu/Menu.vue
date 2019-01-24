@@ -2,7 +2,7 @@
     <div class="menu">
         <div class="header">
             <div class="top">
-              <i class="fa fa-navicon"></i>
+              <i @click="getBack" class="fa fa-close"></i>
             </div>
         </div>
         <div class="content">
@@ -23,6 +23,7 @@
 <script>
 import commonFooter from '../components/common/Footer.vue'
 export default {
+  inject: ['reload'],
   data() {
     return {
       menus: []
@@ -33,7 +34,7 @@ export default {
     // path：跳转路径  栗子：/home, /login
     jump(path) {
       if (location.href.split('#')[1] === path) {
-        location.reload()
+        this.reload()
       } else {
         this.$router.push(path)
       }
@@ -60,6 +61,9 @@ export default {
     },
     getMore() {
       this.jump('/more')
+    },
+    getBack() {
+      this.reload()
     }
   },
   created() {
@@ -97,6 +101,8 @@ export default {
     padding: 80px;
     background-color: @mainColor;
     padding-top: 277px;
+    overflow-y: auto;
+    height: 100vh;
     ul {
       li {
         font-size: 60px;

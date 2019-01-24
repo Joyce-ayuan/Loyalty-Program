@@ -2,6 +2,9 @@
   <div class="outerIfc" ref="outerIfc">
     <div class="ifc" ref="ifc">
         <!-- <commonHeader></commonHeader> -->
+        <!-- 切换蒙层 -->
+        <div class="outerBox" v-if="isShowBox">
+        </div>
         <div class="header">
           <div class="nav" @click="getMenu">
             <i class="fa fa-navicon"></i>
@@ -90,7 +93,8 @@ export default {
     return {
       swiperImg: [],
       details: {},
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   components: { Menu, commonFooter, LoginMenu },
@@ -102,6 +106,7 @@ export default {
       this.$refs.ifc.style.height = '100%'
       this.$refs.outerIfc.style.perspective = '200px'
       this.$refs.outerIfc.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.ifc').toggle_cls('menu')
     },
@@ -112,7 +117,7 @@ export default {
   created() {
     this.axios({
       methods: 'get',
-      url: 'http://localhost/amy/ifc/index.php'
+      url: 'ifc/index.php'
     }).then(res => {
       res.data.forEach((ele, index) => {
         this.swiperImg = ele.imgUrl
@@ -137,6 +142,16 @@ export default {
   .ifc {
     width: 100%;
     height: 100%;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

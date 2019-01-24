@@ -2,6 +2,9 @@
   <div class="outerAbout" ref="outerAbout">
       <div class="about" ref="about">
           <!-- <commonHeader></commonHeader> -->
+            <!-- 切换蒙层 -->
+            <div class="outerBox" v-if="isShowBox">
+            </div>
             <div class="header">
               <div class="nav" @click="getMenu">
                 <i class="fa fa-navicon"></i>
@@ -65,7 +68,8 @@ export default {
     return {
       swiperImgs: {},
       details: {},
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   components: { Menu, LoginMenu, commonFooter },
@@ -77,6 +81,7 @@ export default {
       this.$refs.about.style.height = '100%'
       this.$refs.outerAbout.style.perspective = '200px'
       this.$refs.outerAbout.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.about').toggle_cls('menu')
     },
@@ -87,7 +92,7 @@ export default {
   created() {
     this.axios({
       methods: 'get',
-      url: 'http://localhost/amy/about/index.php'
+      url: 'about/index.php'
     }).then(res => {
       this.swiperImgs = res.data[0].swiperImg
       this.details = res.data[0]
@@ -109,6 +114,16 @@ export default {
 .outerAbout {
   .about {
     width: 100%;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

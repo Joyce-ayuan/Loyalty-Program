@@ -2,6 +2,9 @@
   <div class="outerRegister" ref="outerRegister">
       <div class="register" ref="register">
           <!-- <commonHeader></commonHeader> -->
+          <!-- 切换蒙层 -->
+        <div class="outerBox" v-if="isShowBox">
+        </div>
           <div class="header">
             <div class="nav" @click="getMenu">
               <i class="fa fa-navicon"></i>
@@ -51,7 +54,8 @@ import '../../static/js/kook.add.js'
 export default {
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   components: { commonHeader, commonFooter, LoginMenu },
@@ -73,6 +77,7 @@ export default {
       this.$refs.register.style.marginTop = 0
       this.$refs.outerRegister.style.perspective = '200px'
       this.$refs.outerRegister.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.register').toggle_cls('menu')
     },
@@ -100,6 +105,16 @@ export default {
     height: 100%;
     padding-top: 280px;
     background: #000;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

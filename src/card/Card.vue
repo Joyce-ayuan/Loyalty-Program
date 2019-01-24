@@ -2,6 +2,9 @@
     <div class="cardIndex" ref="cardIndex">
       <div class="membership" ref="membership">
         <!-- <cardHeader></cardHeader> -->
+        <!-- 切换蒙层 -->
+        <div class="outerBox" v-if="isShowBox">
+        </div>
         <div class="header">
           <div class="nav" @click="getMenu">
             <i class="fa fa-navicon"></i>
@@ -46,7 +49,8 @@ export default {
   data() {
     return {
       cards: [],
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   components: { commonFooter, Menu, LoginMenu },
@@ -54,7 +58,7 @@ export default {
     getCards() {
       this.axios({
         method: 'get',
-        url: 'http://localhost/amy/card/index.php'
+        url: 'card/index.php'
       }).then(res => {
         this.cards = res.data
       })
@@ -66,6 +70,8 @@ export default {
       this.$refs.menu.style.display = 'block'
       this.$refs.membership.style.marginTop = 0
       this.$refs.cardIndex.style.perspective = '200px'
+      this.$refs.cardIndex.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.membership').toggle_cls('menu')
     },
@@ -95,6 +101,16 @@ export default {
     padding-top: 280px;
     padding-bottom: 35px;
     background: #000;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

@@ -2,17 +2,15 @@
     <div class="menu">
         <div class="header">
             <div class="top">
-              <i class="fa fa-navicon" @click="getBack"></i>
+              <i class="fa fa-close" @click="getBack"></i>
             </div>
         </div>
         <div class="content">
           <ul>
-            <!-- <li v-for="item in menus" :key="item.id" :class="item.menuName" @click="getMenuDetails(item.menuName)" ref="menuName"><a href="#">{{ item.menuName }}</a></li> -->
             <li @click="toAbout">ABOUT PONG GROUP</li>
             <li @click="toRewards">REWARDS RATE</li>
             <li @click="toTc">TERMS & CONDITIONS</li>
             <li @click="toPrivary">PRIVACY POLICY</li>
-            <!-- <li @click="toNotification">PUSH NOTIFICATION</li> -->
           </ul>
         </div>
         <commonFooter></commonFooter>

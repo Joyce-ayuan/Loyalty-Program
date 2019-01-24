@@ -2,6 +2,9 @@
   <div class="outerDetails" ref="outerDetails">
       <div class="details" ref="details">
           <!-- <cardHeader></cardHeader> -->
+          <!-- 切换蒙层 -->
+            <div class="outerBox" v-if="isShowBox">
+          </div>
           <div class="header">
             <div class="nav" @click="getMenu">
               <i class="fa fa-navicon"></i>
@@ -56,7 +59,8 @@ export default {
       currentId: '',
       detailsInformation: [],
       currentInformation: {},
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   components: { commonFooter, Menu, LoginMenu },
@@ -65,7 +69,7 @@ export default {
       id = this.currentId
       this.axios({
         methods: 'get',
-        url: `http://localhost/amy/card/index.php?id=${id}`
+        url: `card/index.php?id=${id}`
       }).then(res => {
         this.currentInformation = res.data
       })
@@ -73,7 +77,7 @@ export default {
     getDetails() {
       this.axios({
         methods: 'get',
-        url: 'http://localhost/amy/card/index.php'
+        url: 'card/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
           this.detailsInformation.push(ele)
@@ -94,6 +98,7 @@ export default {
       this.$refs.details.style.height = '100%'
       this.$refs.outerDetails.style.perspective = '200px'
       this.$refs.outerDetails.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.details').toggle_cls('menu')
     },
@@ -125,6 +130,16 @@ export default {
     padding-top: 280px;
     padding-bottom: 60px;
     background: #000;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

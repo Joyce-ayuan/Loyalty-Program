@@ -22,6 +22,9 @@ import Notification from '@/notification/Notification.vue'
 import SwiperDetails from '@/home/SwiperDetails.vue'
 import SuccessCard from '@/card/successCard.vue'
 import LoginMenu from '@/menu/LoginMenu.vue'
+import ForgetPsd from '@/login/ForgetPsd.vue'
+import ResetPsd from '@/login/ResetPsd.vue'
+import History from '@/personal/History.vue'
 
 import '../../node_modules/mint-ui/lib/style.css'
 
@@ -112,6 +115,18 @@ const router = new Router({
     path: '/loginMenu',
     name: 'LoginMenu',
     component: LoginMenu
+  }, {
+    path: '/forget',
+    name: 'ForgetPsd',
+    component: ForgetPsd
+  }, {
+    path: '/reset',
+    name: 'ResetPsd',
+    component: ResetPsd
+  }, {
+    path: '/history',
+    name: 'History',
+    component: History
   }]
 })
 

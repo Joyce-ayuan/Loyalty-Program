@@ -2,7 +2,7 @@
     <div class="loginMenu">
         <div class="header">
             <div class="top">
-              <i class="fa fa-navicon"></i>
+              <i @click="getBack" class="fa fa-close"></i>
             </div>
         </div>
         <div class="main">
@@ -30,12 +30,13 @@
 <script>
 import commonFooter from '../components/common/Footer.vue'
 export default {
+  inject: ['reload'],
   components: { commonFooter },
   methods: {
     // path：跳转路径  栗子：/home, /login
     jump(path) {
       if (location.href.split('#')[1] === path) {
-        location.reload()
+        this.reload()
       } else {
         this.$router.push(path)
       }
@@ -57,6 +58,9 @@ export default {
     },
     getCard() {
       this.jump('/successCard')
+    },
+    getBack() {
+      this.reload()
     }
   }
 }
@@ -67,7 +71,7 @@ export default {
 .loginMenu {
   width: 100%;
   //  =============================
-  height: 100vh;
+  height: 100%;
   background-color: @mainColor;
   .header {
     width: 100%;
@@ -89,6 +93,8 @@ export default {
   }
   .main {
     padding-top: 280px;
+    overflow-y: auto;
+    height: 100vh;
     .headerPic {
       width: 450px;
       height: 450px;

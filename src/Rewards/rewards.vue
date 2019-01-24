@@ -2,6 +2,9 @@
   <div class="outerRewards" ref="outerRewards">
     <div class="rewards" ref="rewards">
         <!-- <commonHeader></commonHeader> -->
+        <!-- 切换蒙层 -->
+        <div class="outerBox" v-if="isShowBox">
+        </div>
         <div class="header">
           <div class="nav" @click="getMenu">
             <i class="fa fa-navicon"></i>
@@ -52,7 +55,8 @@ export default {
   data() {
     return {
       rewardMsg: [],
-      isLogin: false
+      isLogin: false,
+      isShowBox: false
     }
   },
   methods: {
@@ -63,6 +67,7 @@ export default {
       this.$refs.rewards.style.height = '100%'
       this.$refs.outerRewards.style.perspective = '200px'
       this.$refs.outerRewards.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
       kook('.rewards').toggle_cls('menu')
     },
@@ -96,6 +101,16 @@ export default {
   .rewards {
     width: 100%;
     height: 100%;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;

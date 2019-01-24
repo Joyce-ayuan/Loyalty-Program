@@ -15,19 +15,15 @@
             <i class="fa fa-close"></i>
           </div>
         </div>
-        <!-- <LoginHeader><LoginHeader> -->
-        <!-- <div class="pic">
-            <img src="" alt="">
-        </div> -->
         <div class="form">
-            <mt-field placeholder="Mobile Number" v-model="users.username"></mt-field>
-            <mt-field placeholder="Password" type="password" v-model="users.password"></mt-field>
-            <button @click="login">LOGIN</button>
-            <p @click="getPswd">Forgot Password?</p>
+            <mt-field placeholder="Mobile Number" v-model="users.username">
+                <button class="btn" style="">get code</button>
+            </mt-field>
+            <mt-field placeholder="Password used 1" type="password" v-model="users.password"></mt-field>
+            <mt-field placeholder="Password used 2" type="password" v-model="users.password"></mt-field>
+            <mt-field placeholder="verification code" type="password" v-model="users.password"></mt-field>
+            <button @click="next">NEXT</button>
         </div>
-        <!-- <div class="register" @click="register">
-            <p>REGISTER NOW</p>
-        </div> -->
         <commonFooter class="flagFooter" ref="footer"></commonFooter>
       </div>
       <div class="menu" ref="menu" v-if="isLogin">
@@ -59,17 +55,8 @@ export default {
   },
   components: { LoginMenu, commonFooter, Menu },
   methods: {
-    login() {
-      this.axios({
-        methods: 'post',
-        url: 'http://localhost/amy/login/index.php'
-      }).then(res => {
-        if (parseInt(res.data.status) === 200) {
-          console.log('登陆成功')
-          document.cookie = 'code=' + 200
-          this.$router.push('/personal')
-        }
-      })
+    next() {
+      this.$router.push('/reset')
     },
     register() {
       this.$router.push('/register')
@@ -85,10 +72,6 @@ export default {
     },
     close() {
       window.history.go(-1)
-    },
-    getPswd() {
-      console.log(11)
-      this.$router.push('/forget')
     }
   },
   created() {
@@ -158,26 +141,21 @@ export default {
         }
       }
     }
-    // .pic {
-    //   width: 100%;
-    //   height: 990px;
-    //   background-color: #000;
-    //   overflow: hidden;
-    //   img {
-    //     display: block;
-    //     width: 894px;
-    //     height: 900px;
-    //     background: #f04;
-    //     border-radius: 50%;
-    //     margin: 30px auto;
-    //   }
-    // }
     .form {
       width: 100%;
       height: 920px;
       background: #000;
       padding: 80px 150px;
       margin-top: 350px;
+      .btn {
+        width: 240px;
+        height: 80px;
+        background-color: @mainColor;
+        position: relative;
+        top: -40px;
+        border-radius: 10px;
+        letter-spacing: 1px;
+      }
       button {
         width: 440px;
         height: 97px;
@@ -198,20 +176,6 @@ export default {
         margin-top: 30px;
       }
     }
-    // .register {
-    //   width: 100%;
-    //   height: 124px;
-    //   background: #000;
-    //   padding-bottom: 250px;
-    //   p {
-    //     color: @mainColor;
-    //     font-size: 60px;
-    //     letter-spacing: 15px;
-    //     text-align: center;
-    //     line-height: 120px;
-    //     border: 3px solid @mainColor;
-    //   }
-    // }
   }
 }
 

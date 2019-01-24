@@ -1,17 +1,31 @@
 <template>
     <div class="downSwiper">
         <template>
-            <div class="swiper-container">
+            <div class="swiper-container swiper1" ref="swiperContainer1">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="item in swiperUrl" :key="item.id">
+                    <div class="swiper-slide" v-for="item in swiperUrl" :key="item.id" @click="getDetails(item.id)">
                         <img :src="item.imgUrl" alt="">
                     </div>
                 </div>
                 <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev">
+                <div class="swiper-button-prev" @click="getPrev">
                     <i class="fa fa-arrow-circle-o-left"></i>
                 </div>
-                <div class="swiper-button-next">
+                <div class="swiper-button-next" @click="getNext">
+                    <i class="fa fa-arrow-circle-o-right"></i>
+                </div>
+            </div>
+            <div class="swiper-container swiper2" ref="swiperContainer2">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item in swiperUrl" :key="item.id" @click="getDetails(index)" ref="slide">
+                        <img :src="item.imgUrl" alt="">
+                    </div>
+                </div>
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev" @click="getPrev">
+                    <i class="fa fa-arrow-circle-o-left"></i>
+                </div>
+                <div class="swiper-button-next" @click="getNext">
                     <i class="fa fa-arrow-circle-o-right"></i>
                 </div>
             </div>
@@ -24,39 +38,101 @@ import Swiper from 'swiper'
 export default {
   data() {
     return {
-      swiperUrl: []
+      swiperUrl: [],
+      slidesPerViews: 2,
+      swiperId: '',
+      currentPage1: 0,
+      currentPage2: ''
     }
   },
   methods: {
     getMainSwiper() {
       this.axios({
         method: 'get',
-        url: 'http://localhost/amy/productSwiper/index.php'
+        url: 'productSwiper/index.php'
       }).then(res => {
         res.data.forEach((ele, index) => {
           this.swiperUrl.push(ele)
         })
       })
+    },
+    getDetails(index) {
+      this.$refs.swiperContainer2.style.display = 'block'
+      this.$refs.swiperContainer1.style.display = 'none'
+      this.swiperId = index - 1
+      this.mySwiper2.slideTo(parseInt(this.swiperId), 50, false)
+    },
+    getPrev() {
+      this.currentPage1 = parseInt(this.swiperUrl.length / 2) - 1
+      if (this.currentPage1 <= 0) {
+        this.currentPage1 = 0
+      } else {
+        this.currentPage1--
+      }
+      this.mySwiper1.slideTo(this.currentPage1, 50, false)
+
+      if (this.currentPage2 <= 0) {
+        this.currentPage2 = 0
+      } else {
+        this.currentPage2--
+      }
+      this.mySwiper2.slideTo(this.currentPage2, 50, false)
+    },
+    getNext() {
+      if (this.currentPage1 >= parseInt(this.swiperUrl.length / 2) - 1) {
+        this.currentPage1 = parseInt(this.swiperUrl.length / 2) - 1
+      } else {
+        this.currentPage1++
+      }
+      this.mySwiper1.slideTo(this.currentPage1, 50, false)
+
+      if (this.currentPage2 >= parseInt(this.swiperUrl.length) - 1) {
+        this.currentPage2 = parseInt(this.swiperUrl.length) - 1
+      } else {
+        this.currentPage2++
+      }
+      this.mySwiper2.slideTo(this.currentPage2, 50, false)
     }
   },
   created() {
     this.getMainSwiper()
   },
   mounted() {
+    let that = this
     /* eslint-disable */
-    var mySwiper = new Swiper('.swiper-container', {
-      // initialSlide: 0,
-      slidesPerView: 2,
+    let mySwiper1 = (that.mySwiper1 = new Swiper('.swiper1', {
+      slidesPerView: this.slidesPerViews,
       observer: true,
       observeParents: true,
       nextButton: '.swiper-button-next',
       prevButton: '.swiper-button-prev'
-    })
+    }))
+    /* eslint-disable */
+    let mySwiper2 = (that.mySwiper2 = new Swiper('.swiper2', {
+      slidesPerView: this.slidesPerViews,
+      observer: true,
+      observeParents: true,
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      effect: 'coverflow',
+      slidesPerView: 3,
+      centeredSlides: true,
+      initialSlide: 1,
+      coverflowEffect: {
+        rotate: 20,
+        stretch: 10,
+        depth: 80,
+        modifier: 2,
+        slideShadows: true
+      }
+    }))
     setTimeout(() => {
-      mySwiper.slideTo(0, 50, false)
+      mySwiper1.slideTo(0, 50, false)
       document.getElementsByClassName('swiper-wrapper')[0].style.transform =
         'translate3d(0px, 0px, 0px)'
-    }, 50)
+    }, 500)
+
+    this.$refs.swiperContainer2.style.display = 'none'
   }
 }
 </script>
@@ -106,5 +182,14 @@ export default {
       }
     }
   }
+  .swiper2 {
+    .swiper-wrapper {
+      margin-left: -210px;
+    }
+  }
+}
+
+.swiper-button-disabled {
+  display: none;
 }
 </style>

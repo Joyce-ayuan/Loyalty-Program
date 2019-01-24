@@ -1,6 +1,9 @@
 <template>
-    <div class="login">
+    <div class="login" ref="login">
       <div class="innerLogin" ref="innerLogin">
+        <!-- 切换蒙层 -->
+        <div class="outerBox" v-if="isShowBox">
+        </div>
         <div class="header">
           <div class="nav" @click="getMenu">
             <i class="fa fa-navicon"></i>
@@ -12,30 +15,28 @@
             <i class="fa fa-close"></i>
           </div>
         </div>
-        <div class="pic">
-            <img src="" alt="">
-        </div>
         <div class="form">
             <mt-field placeholder="Mobile Number" v-model="users.username"></mt-field>
-            <mt-field placeholder="Password" type="password" v-model="users.password"></mt-field>
-            <button @click="login">LOGIN</button>
-            <p>Forgot Password?</p>
+            <mt-field placeholder="New Password" type="password" v-model="users.password"></mt-field>
+            <mt-field placeholder="New Password Again" type="password" v-model="users.password"></mt-field>
+            <button @click="login">NEXT</button>
         </div>
-        <div class="register" @click="register">
-            <p>REGISTER NOW</p>
-        </div>
-        <commonFooter class="flagFooter" ref="footer" style="bottom: -10px"></commonFooter>
+        <commonFooter class="flagFooter" ref="footer"></commonFooter>
       </div>
-      <div class="menu" ref="menu">
+      <div class="menu" ref="menu" v-if="isLogin">
+        <LoginMenu></LoginMenu>
+      </div>
+      <div class="menu" ref="menu" v-else>
         <Menu></Menu>
       </div>
     </div>
 </template>
 
 <script>
-import LoginHeader from '../components/common/LoginHeader.vue'
+// import LoginHeader from '../components/common/LoginHeader.vue'
 import commonFooter from '../components/common/Footer.vue'
 import Menu from '../menu/Menu.vue'
+import LoginMenu from '../menu/LoginMenu.vue'
 import '../../static/js/kook.js'
 import '../../static/js/kook.add.js'
 export default {
@@ -44,39 +45,40 @@ export default {
       users: {
         username: '',
         password: ''
-      }
+      },
+      isLogin: false,
+      isShowBox: false
     }
   },
-  components: { LoginHeader, commonFooter, Menu },
+  components: { LoginMenu, commonFooter, Menu },
   methods: {
     login() {
-      this.axios({
-        methods: 'post',
-        url: 'http://localhost/amy/login/index.php'
-      }).then(res => {
-        if (parseInt(res.data.status) === 200) {
-          this.$router.push('/personal')
-        }
-      })
+      this.$router.push('/login')
     },
     register() {
       this.$router.push('/register')
     },
     getMenu() {
-      console.log(11)
-      this.$router.push('/menu')
-      // this.$refs.menu.style.display = 'block'
-      // this.$refs.innerLogin.style.marginTop = 0
-      // Array.from(
-      //   document.getElementsByClassName('flagFooter')
-      // )[0].style.position =
-      //   'static'
+      this.$refs.menu.style.display = 'block'
+      this.$refs.innerLogin.style.marginTop = 0
+      this.$refs.login.style.perspective = '100px'
+      this.$refs.login.style.overflow = 'hidden'
+      this.isShowBox = true
       /* eslint-disable */
-      // kook('.innerLogin').toggle_cls('menu')
+      kook('.innerLogin').toggle_cls('menu')
     },
     close() {
       window.history.go(-1)
     }
+  },
+  created() {
+    if (parseInt(document.cookie.split('=')[1]) === 200) {
+      this.isLogin = true
+      console.log(this.isLogin)
+    }
+  },
+  mounted() {
+    this.$refs.menu.style.display = 'none'
   }
 }
 </script>
@@ -84,11 +86,23 @@ export default {
 <style lang="less" scoped>
 @mainColor: #98843a;
 .login {
-  padding-top: 277px;
   width: 100%;
-  height: 100%;
-  background: #000;
+  background: #fff;
   .innerLogin {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    padding-top: 277px;
+    .outerBox {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999999;
+      opacity: 0;
+    }
     .header {
       height: 277px;
       width: 100%;
@@ -124,25 +138,12 @@ export default {
         }
       }
     }
-    .pic {
-      width: 100%;
-      height: 990px;
-      background-color: #000;
-      overflow: hidden;
-      img {
-        display: block;
-        width: 894px;
-        height: 900px;
-        background: #f04;
-        border-radius: 50%;
-        margin: 30px auto;
-      }
-    }
     .form {
       width: 100%;
       height: 920px;
       background: #000;
       padding: 80px 150px;
+      margin-top: 350px;
       button {
         width: 440px;
         height: 97px;
@@ -160,24 +161,9 @@ export default {
         text-align: center;
         margin-top: 20px;
         letter-spacing: 3px;
+        margin-top: 30px;
       }
     }
-    .register {
-      width: 100%;
-      height: 124px;
-      border: 3px solid @mainColor;
-      background: #000;
-      margin-bottom: 250px;
-      p {
-        color: @mainColor;
-        font-size: 60px;
-        letter-spacing: 15px;
-        text-align: center;
-        line-height: 120px;
-      }
-    }
-  }
-  .menu {
   }
 }
 
@@ -185,20 +171,16 @@ export default {
 .login {
   .innerLogin {
     &.menu {
-      height: calc(100% - 100px);
-      margin-left: -550px;
-      margin-top: -30px;
+      margin-left: 85%;
+      margin-top: -300px;
       backface-visibility: hidden;
-      background-color: #fff;
       transition: 1s;
-      transform: rotateY(-50deg);
+      transform: rotateY(-20deg);
       position: absolute;
-      top: 0;
+      top: -120px;
       left: 0;
+      z-index: 99999;
     }
-  }
-  .menu {
-    display: none;
   }
 }
 </style>
